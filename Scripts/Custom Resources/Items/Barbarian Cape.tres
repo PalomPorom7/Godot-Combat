@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=4 format=3 uid="uid://cj0pwl2664i2n"]
+
+[ext_resource type="Texture2D" uid="uid://dnhnfs5nacqbg" path="res://Imported Assets/Icons/#1 - Transparent Icons.png" id="1_n4tya"]
+[ext_resource type="Script" path="res://Scripts/Custom Resources/Items/equipment.gd" id="1_vh3lk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lovmo"]
+atlas = ExtResource("1_n4tya")
+region = Rect2(192, 224, 32, 32)
+
+[resource]
+script = ExtResource("1_vh3lk")
+type = 3
+name = "Barbarian Cape"
+description = "It's probably made of leather."
+icon = SubResource("AtlasTexture_lovmo")
+scene = "res://Scenes/Items/barbarian_cape.tscn"
+is_usable = false
+is_consumed_on_use = false

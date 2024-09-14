@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=4 format=3 uid="uid://4gjgoigoobw6"]
+
+[ext_resource type="Texture2D" uid="uid://dnhnfs5nacqbg" path="res://Imported Assets/Icons/#1 - Transparent Icons.png" id="1_35tdb"]
+[ext_resource type="Script" path="res://Scripts/Custom Resources/Items/equipment.gd" id="1_nmxqs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u8nrr"]
+atlas = ExtResource("1_35tdb")
+region = Rect2(128, 192, 32, 32)
+
+[resource]
+script = ExtResource("1_nmxqs")
+type = 0
+name = "Crossbow"
+description = "Fires bolts with ease."
+value = 1
+icon = SubResource("AtlasTexture_u8nrr")
+scene = "res://Scenes/Items/crossbow.tscn"
+is_usable = false
+is_consumed_on_use = false

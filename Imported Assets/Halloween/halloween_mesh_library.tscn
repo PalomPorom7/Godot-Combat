@@ -1,0 +1,187 @@
+[gd_scene load_steps=62 format=3 uid="uid://bffwt3ntlebnw"]
+
+[ext_resource type="PackedScene" uid="uid://bm24qbollrhiy" path="res://Imported Assets/Halloween/arch.gltf" id="1_lpsoj"]
+[ext_resource type="PackedScene" uid="uid://8semviffhae8" path="res://Imported Assets/Halloween/bench.gltf" id="3_eje0w"]
+[ext_resource type="PackedScene" uid="uid://bqkc4ow48tr1w" path="res://Imported Assets/Halloween/bench_decorated.gltf" id="4_jwahk"]
+[ext_resource type="PackedScene" uid="uid://cj1j1vhpgkq5n" path="res://Imported Assets/Halloween/bone_A.gltf" id="5_pitl6"]
+[ext_resource type="PackedScene" uid="uid://exhmrneswkbg" path="res://Imported Assets/Halloween/bone_B.gltf" id="6_k84d1"]
+[ext_resource type="PackedScene" uid="uid://cqpqvoscytpuk" path="res://Imported Assets/Halloween/bone_C.gltf" id="7_rfkeg"]
+[ext_resource type="PackedScene" uid="uid://bllwte028q3jc" path="res://Imported Assets/Halloween/candle.gltf" id="8_mrdrh"]
+[ext_resource type="PackedScene" uid="uid://b6je6ux2nxv2i" path="res://Imported Assets/Halloween/candle_melted.gltf" id="9_x4xgm"]
+[ext_resource type="PackedScene" uid="uid://c2ifg3ghhfn1v" path="res://Imported Assets/Halloween/candle_thin.gltf" id="10_4pcs6"]
+[ext_resource type="PackedScene" uid="uid://1m4bamifsk23" path="res://Imported Assets/Halloween/candle_triple.gltf" id="11_yjrnq"]
+[ext_resource type="PackedScene" uid="uid://co6662o2l3li6" path="res://Imported Assets/Halloween/coffin.gltf" id="12_gtxqo"]
+[ext_resource type="PackedScene" uid="uid://cu0hfx3jfgtxi" path="res://Imported Assets/Halloween/coffin_decorated.gltf" id="13_4q4s8"]
+[ext_resource type="PackedScene" uid="uid://rwpxkvnvkolq" path="res://Imported Assets/Halloween/crypt.gltf" id="14_47827"]
+[ext_resource type="PackedScene" uid="uid://3u5oxqr1p2f2" path="res://Imported Assets/Halloween/fence.gltf" id="15_kwx15"]
+[ext_resource type="PackedScene" uid="uid://bbcjlxmqbsv7l" path="res://Imported Assets/Halloween/fence_broken.gltf" id="16_ogk1e"]
+[ext_resource type="PackedScene" uid="uid://co25ohbv4fip0" path="res://Imported Assets/Halloween/fence_pillar.gltf" id="18_erm5h"]
+[ext_resource type="PackedScene" uid="uid://lc34vlo8w4gx" path="res://Imported Assets/Halloween/fence_pillar_broken.gltf" id="19_3i34h"]
+[ext_resource type="PackedScene" uid="uid://cwrl7vesqgd1v" path="res://Imported Assets/Halloween/fence_seperate.gltf" id="20_76f6k"]
+[ext_resource type="PackedScene" uid="uid://drrmatgnd0t51" path="res://Imported Assets/Halloween/fence_seperate_broken.gltf" id="21_knf6b"]
+[ext_resource type="PackedScene" uid="uid://3iqtnnsilx1c" path="res://Imported Assets/Halloween/floor_dirt.gltf" id="22_5pcw7"]
+[ext_resource type="PackedScene" uid="uid://gyen372bann0" path="res://Imported Assets/Halloween/floor_dirt_grave.gltf" id="23_h5arh"]
+[ext_resource type="PackedScene" uid="uid://dny7g5i5wlval" path="res://Imported Assets/Halloween/floor_dirt_small.gltf" id="24_dnu7y"]
+[ext_resource type="PackedScene" uid="uid://c8qront6mmvr8" path="res://Imported Assets/Halloween/gravemarker_A.gltf" id="25_mciaa"]
+[ext_resource type="PackedScene" uid="uid://cw5p76v5ufequ" path="res://Imported Assets/Halloween/gravemarker_B.gltf" id="26_r8fbv"]
+[ext_resource type="PackedScene" uid="uid://cet5b7iq5cmn4" path="res://Imported Assets/Halloween/gravestone.gltf" id="27_c1aab"]
+[ext_resource type="PackedScene" uid="uid://d0s8170v0yoer" path="res://Imported Assets/Halloween/grave_A.gltf" id="28_x2n4f"]
+[ext_resource type="PackedScene" uid="uid://sy5gyyhbsn43" path="res://Imported Assets/Halloween/grave_A_destroyed.gltf" id="29_4waoq"]
+[ext_resource type="PackedScene" uid="uid://bfbibw3w6nl23" path="res://Imported Assets/Halloween/grave_B.gltf" id="30_q41t7"]
+[ext_resource type="PackedScene" uid="uid://37d7rkxibim" path="res://Imported Assets/Halloween/lantern_hanging.gltf" id="31_7r2uh"]
+[ext_resource type="PackedScene" uid="uid://f831pqsdwxyh" path="res://Imported Assets/Halloween/lantern_standing.gltf" id="32_hyutd"]
+[ext_resource type="PackedScene" uid="uid://cs28ogq8tjpf6" path="res://Imported Assets/Halloween/path_A.gltf" id="33_imakx"]
+[ext_resource type="PackedScene" uid="uid://j2un0mfjrnwh" path="res://Imported Assets/Halloween/path_B.gltf" id="34_dbc5y"]
+[ext_resource type="PackedScene" uid="uid://p1xq34rmjs1j" path="res://Imported Assets/Halloween/path_C.gltf" id="35_46hvb"]
+[ext_resource type="PackedScene" uid="uid://b20f0s4lsncvx" path="res://Imported Assets/Halloween/path_D.gltf" id="36_iqqq7"]
+[ext_resource type="PackedScene" uid="uid://0ix7bw4wulp2" path="res://Imported Assets/Halloween/pillar.gltf" id="37_us76y"]
+[ext_resource type="PackedScene" uid="uid://coxfb3xplyemb" path="res://Imported Assets/Halloween/plaque.gltf" id="38_4a2wc"]
+[ext_resource type="PackedScene" uid="uid://d2tup63yp110r" path="res://Imported Assets/Halloween/plaque_candles.gltf" id="39_6gm7g"]
+[ext_resource type="PackedScene" uid="uid://dqedp8gsx2m7v" path="res://Imported Assets/Halloween/post.gltf" id="40_pjojf"]
+[ext_resource type="PackedScene" uid="uid://bjjaxtac2dvmj" path="res://Imported Assets/Halloween/post_lantern.gltf" id="41_ttbrk"]
+[ext_resource type="PackedScene" uid="uid://u6ts0b0uqc6d" path="res://Imported Assets/Halloween/post_skull.gltf" id="42_52f16"]
+[ext_resource type="PackedScene" uid="uid://ceyev0ikyjas7" path="res://Imported Assets/Halloween/pumpkin_orange.gltf" id="43_qbbbc"]
+[ext_resource type="PackedScene" uid="uid://c347kj0ojfyo1" path="res://Imported Assets/Halloween/pumpkin_orange_jackolantern.gltf" id="44_ws0rs"]
+[ext_resource type="PackedScene" uid="uid://b1pc3ra818lue" path="res://Imported Assets/Halloween/pumpkin_orange_small.gltf" id="45_pvt20"]
+[ext_resource type="PackedScene" uid="uid://hw6nk5w4tquf" path="res://Imported Assets/Halloween/pumpkin_yellow.gltf" id="46_xoo48"]
+[ext_resource type="PackedScene" uid="uid://j0u6df4au3ft" path="res://Imported Assets/Halloween/pumpkin_yellow_jackolantern.gltf" id="47_fvnti"]
+[ext_resource type="PackedScene" uid="uid://brjpsoe6xw4ew" path="res://Imported Assets/Halloween/pumpkin_yellow_small.gltf" id="48_1qvff"]
+[ext_resource type="PackedScene" uid="uid://dh37c7vfrk0s2" path="res://Imported Assets/Halloween/ribcage.gltf" id="49_0uqqk"]
+[ext_resource type="PackedScene" uid="uid://dkk1vvukdfufa" path="res://Imported Assets/Halloween/shrine.gltf" id="50_n8pkd"]
+[ext_resource type="PackedScene" uid="uid://di5am3fd5nde6" path="res://Imported Assets/Halloween/shrine_candles.gltf" id="51_meh3i"]
+[ext_resource type="PackedScene" uid="uid://c2goxasbixj8i" path="res://Imported Assets/Halloween/skull.gltf" id="52_xvws6"]
+[ext_resource type="PackedScene" uid="uid://cesc4w4od52na" path="res://Imported Assets/Halloween/skull_candle.gltf" id="53_vlbts"]
+[ext_resource type="PackedScene" uid="uid://dkgp2b20gsy5f" path="res://Imported Assets/Halloween/tree_dead_large.gltf" id="54_rgeh5"]
+[ext_resource type="PackedScene" uid="uid://cwk7heljspa1p" path="res://Imported Assets/Halloween/tree_dead_large_decorated.gltf" id="55_leamp"]
+[ext_resource type="PackedScene" uid="uid://bx7xp1wu5t2pu" path="res://Imported Assets/Halloween/tree_dead_medium.gltf" id="56_ktsjn"]
+[ext_resource type="PackedScene" uid="uid://mdpi01jncjni" path="res://Imported Assets/Halloween/tree_dead_small.gltf" id="57_31njy"]
+[ext_resource type="PackedScene" uid="uid://c8j1ahjusyg7c" path="res://Imported Assets/Halloween/tree_pine_orange_large.gltf" id="58_tlcqq"]
+[ext_resource type="PackedScene" uid="uid://bf1qucde0w0s8" path="res://Imported Assets/Halloween/tree_pine_orange_medium.gltf" id="59_l0uvg"]
+[ext_resource type="PackedScene" uid="uid://bnqaabrxdjr77" path="res://Imported Assets/Halloween/tree_pine_orange_small.gltf" id="60_dde0u"]
+[ext_resource type="PackedScene" uid="uid://1x54ctxfvss7" path="res://Imported Assets/Halloween/tree_pine_yellow_large.gltf" id="61_50hrv"]
+[ext_resource type="PackedScene" uid="uid://bd7mtcvbboxc7" path="res://Imported Assets/Halloween/tree_pine_yellow_medium.gltf" id="62_0o6aq"]
+[ext_resource type="PackedScene" uid="uid://bsa7u5vfl020h" path="res://Imported Assets/Halloween/tree_pine_yellow_small.gltf" id="63_7o4l7"]
+
+[node name="Halloween Mesh Library" type="Node3D"]
+
+[node name="arch2" parent="." instance=ExtResource("1_lpsoj")]
+
+[node name="bench2" parent="." instance=ExtResource("3_eje0w")]
+
+[node name="bench_decorated2" parent="." instance=ExtResource("4_jwahk")]
+
+[node name="bone_A2" parent="." instance=ExtResource("5_pitl6")]
+
+[node name="bone_B2" parent="." instance=ExtResource("6_k84d1")]
+
+[node name="bone_C2" parent="." instance=ExtResource("7_rfkeg")]
+
+[node name="candle2" parent="." instance=ExtResource("8_mrdrh")]
+
+[node name="candle_melted2" parent="." instance=ExtResource("9_x4xgm")]
+
+[node name="candle_thin2" parent="." instance=ExtResource("10_4pcs6")]
+
+[node name="candle_triple2" parent="." instance=ExtResource("11_yjrnq")]
+
+[node name="coffin2" parent="." instance=ExtResource("12_gtxqo")]
+
+[node name="coffin_decorated2" parent="." instance=ExtResource("13_4q4s8")]
+
+[node name="crypt2" parent="." instance=ExtResource("14_47827")]
+
+[node name="fence2" parent="." instance=ExtResource("15_kwx15")]
+
+[node name="fence_broken2" parent="." instance=ExtResource("16_ogk1e")]
+
+[node name="fence_pillar2" parent="." instance=ExtResource("18_erm5h")]
+
+[node name="fence_pillar_broken2" parent="." instance=ExtResource("19_3i34h")]
+
+[node name="fence_seperate2" parent="." instance=ExtResource("20_76f6k")]
+
+[node name="fence_seperate_broken2" parent="." instance=ExtResource("21_knf6b")]
+
+[node name="floor_dirt2" parent="." instance=ExtResource("22_5pcw7")]
+
+[node name="floor_dirt_grave2" parent="." instance=ExtResource("23_h5arh")]
+
+[node name="floor_dirt_small2" parent="." instance=ExtResource("24_dnu7y")]
+
+[node name="gravemarker_A2" parent="." instance=ExtResource("25_mciaa")]
+
+[node name="gravemarker_B2" parent="." instance=ExtResource("26_r8fbv")]
+
+[node name="gravestone2" parent="." instance=ExtResource("27_c1aab")]
+
+[node name="grave_A2" parent="." instance=ExtResource("28_x2n4f")]
+
+[node name="grave_A_destroyed2" parent="." instance=ExtResource("29_4waoq")]
+
+[node name="grave_B2" parent="." instance=ExtResource("30_q41t7")]
+
+[node name="lantern_hanging2" parent="." instance=ExtResource("31_7r2uh")]
+
+[node name="lantern_standing2" parent="." instance=ExtResource("32_hyutd")]
+
+[node name="path_A2" parent="." instance=ExtResource("33_imakx")]
+
+[node name="path_B2" parent="." instance=ExtResource("34_dbc5y")]
+
+[node name="path_C2" parent="." instance=ExtResource("35_46hvb")]
+
+[node name="path_D2" parent="." instance=ExtResource("36_iqqq7")]
+
+[node name="pillar2" parent="." instance=ExtResource("37_us76y")]
+
+[node name="plaque2" parent="." instance=ExtResource("38_4a2wc")]
+
+[node name="plaque_candles2" parent="." instance=ExtResource("39_6gm7g")]
+
+[node name="post2" parent="." instance=ExtResource("40_pjojf")]
+
+[node name="post_lantern2" parent="." instance=ExtResource("41_ttbrk")]
+
+[node name="post_skull2" parent="." instance=ExtResource("42_52f16")]
+
+[node name="pumpkin_orange2" parent="." instance=ExtResource("43_qbbbc")]
+
+[node name="pumpkin_orange_jackolantern2" parent="." instance=ExtResource("44_ws0rs")]
+
+[node name="pumpkin_orange_small2" parent="." instance=ExtResource("45_pvt20")]
+
+[node name="pumpkin_yellow2" parent="." instance=ExtResource("46_xoo48")]
+
+[node name="pumpkin_yellow_jackolantern2" parent="." instance=ExtResource("47_fvnti")]
+
+[node name="pumpkin_yellow_small2" parent="." instance=ExtResource("48_1qvff")]
+
+[node name="ribcage2" parent="." instance=ExtResource("49_0uqqk")]
+
+[node name="shrine2" parent="." instance=ExtResource("50_n8pkd")]
+
+[node name="shrine_candles2" parent="." instance=ExtResource("51_meh3i")]
+
+[node name="skull2" parent="." instance=ExtResource("52_xvws6")]
+
+[node name="skull_candle2" parent="." instance=ExtResource("53_vlbts")]
+
+[node name="tree_dead_large2" parent="." instance=ExtResource("54_rgeh5")]
+
+[node name="tree_dead_large_decorated2" parent="." instance=ExtResource("55_leamp")]
+
+[node name="tree_dead_medium2" parent="." instance=ExtResource("56_ktsjn")]
+
+[node name="tree_dead_small2" parent="." instance=ExtResource("57_31njy")]
+
+[node name="tree_pine_orange_large2" parent="." instance=ExtResource("58_tlcqq")]
+
+[node name="tree_pine_orange_medium2" parent="." instance=ExtResource("59_l0uvg")]
+
+[node name="tree_pine_orange_small2" parent="." instance=ExtResource("60_dde0u")]
+
+[node name="tree_pine_yellow_large2" parent="." instance=ExtResource("61_50hrv")]
+
+[node name="tree_pine_yellow_medium2" parent="." instance=ExtResource("62_0o6aq")]
+
+[node name="tree_pine_yellow_small2" parent="." instance=ExtResource("63_7o4l7")]

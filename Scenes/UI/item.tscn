@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://dheen06g77ypr"]
+
+[ext_resource type="Texture2D" uid="uid://dnhnfs5nacqbg" path="res://Imported Assets/Icons/#1 - Transparent Icons.png" id="1_ox3rv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qe7n1"]
+atlas = ExtResource("1_ox3rv")
+region = Rect2(5, 291, 22, 26)
+
+[node name="Item" type="Button"]
+custom_minimum_size = Vector2(256, 256)
+
+[node name="Icon" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -13.0
+offset_right = 21.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(8, 8)
+pivot_offset = Vector2(16, 16)
+texture = SubResource("AtlasTexture_qe7n1")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -83.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 32
+text = "E"
+horizontal_alignment = 1

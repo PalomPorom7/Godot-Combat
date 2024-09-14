@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://dujtkfkjn3agj"]
+
+[ext_resource type="Script" path="res://Scripts/level.gd" id="1_lj7g2"]
+[ext_resource type="MeshLibrary" uid="uid://cahijkkfy3axd" path="res://Imported Assets/Halloween/halloween_mesh_library.tres" id="2_ppmmg"]
+[ext_resource type="PackedScene" uid="uid://ovkq88civi8k" path="res://Scenes/Enemies/skeleton_minion.tscn" id="3_vmtyv"]
+[ext_resource type="PackedScene" uid="uid://c86wrgk0e17d1" path="res://Scenes/Enemies/skeleton_mage.tscn" id="4_2c112"]
+[ext_resource type="PackedScene" uid="uid://d2dolmw02u64r" path="res://Scenes/Enemies/skeleton_rogue.tscn" id="5_s5s6c"]
+[ext_resource type="PackedScene" uid="uid://dwvngno8a1nw1" path="res://Scenes/Enemies/skeleton_warrior.tscn" id="6_ni8s3"]
+[ext_resource type="Texture2D" uid="uid://b5dff1enbcmtq" path="res://Imported Assets/Skybox/AllSky_Night_MoonBurst Equirect.png" id="7_l175e"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_t4586"]
+panorama = ExtResource("7_l175e")
+
+[sub_resource type="Sky" id="Sky_wjvqb"]
+sky_material = SubResource("PanoramaSkyMaterial_t4586")
+
+[sub_resource type="Environment" id="Environment_d6sej"]
+background_mode = 2
+sky = SubResource("Sky_wjvqb")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.1
+glow_enabled = true
+glow_bloom = 1.0
+fog_light_energy = 0.1
+fog_sky_affect = 0.1
+volumetric_fog_enabled = true
+volumetric_fog_sky_affect = 0.1
+
+[node name="Graveyard" type="Node3D"]
+script = ExtResource("1_lj7g2")
+
+[node name="Lighting" type="Node3D" parent="."]
+
+[node name="Moonlight" type="DirectionalLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 10, 0)
+light_color = Color(0.588235, 0.784314, 0.882353, 1)
+light_energy = 0.5
+shadow_enabled = true
+
+[node name="Ground" type="GridMap" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.125, 0)
+mesh_library = ExtResource("2_ppmmg")
+cell_size = Vector3(0.25, 0.25, 0.25)
+data = {
+"cells": PackedInt32Array(65529, 6, 19, 8, 6, 19, 65529, 65527, 19, 8, 65527, 19, 23, 6, 19, 23, 65527, 19, 8, 65512, 19, 23, 65512, 19, 8, 65497, 1441811, 8, 65482, 1441811, 23, 65497, 1441811, 23, 65482, 1441811, 65529, 21, 1441811, 8, 21, 1441811, 23, 21, 1441811, 38, 65497, 1441811, 38, 65512, 1441811, 38, 65527, 1441811, 53, 65527, 1441811, 53, 65512, 1441811, 53, 65497, 1441811, 53, 65482, 1441811, 65529, 65512, 1441811, 65533, 65501, 1441813, 65533, 65494, 1441813, 65533, 65487, 1441813, 65533, 65480, 1441813, 38, 65482, 20, 68, 65482, 19, 68, 65467, 19, 68, 65452, 19, 68, 65437, 19, 53, 65467, 19, 53, 65452, 19, 53, 65437, 19, 38, 65467, 19, 38, 65452, 19, 38, 65437, 19, 23, 65467, 19, 23, 65452, 19, 68, 65422, 19, 53, 65422, 19, 38, 65422, 19, 68, 65497, 19, 68, 65512, 20, 68, 65527, 19, 83, 65527, 19, 83, 65526, 19, 83, 65511, 19, 83, 65496, 19, 83, 65481, 19, 83, 65466, 19, 83, 65451, 19, 83, 65436, 19, 8, 65467, 19, 8, 65452, 19, 83, 65422, 19, 98, 65422, 1441811, 98, 65407, 1441811, 83, 65407, 1441811, 41, 2, 1441813, 34, 2, 1441813, 48, 2, 1441813, 55, 2, 1441813, 62, 2, 1441813, 69, 2, 1441813, 76, 2, 1441813, 83, 2, 1441813, 19, 32, 1441813, 34, 9, 1441813, 12, 32, 1441813, 5, 32, 1441813, 65518, 17, 1441813, 65518, 10, 1441813, 65518, 3, 1441813, 65518, 65531, 1441813, 65518, 65524, 1441813, 23, 65437, 1441811, 8, 65437, 1441811, 65533, 65473, 1441813, 65533, 65467, 1441813, 65533, 65460, 1441813, 65533, 65453, 1441813, 65533, 65446, 1441813, 65533, 65439, 1441813, 65533, 65433, 1441813, 27, 65426, 21, 27, 65419, 21)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="Decor" type="GridMap" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh_library = ExtResource("2_ppmmg")
+cell_size = Vector3(1, 1, 1)
+data = {
+"cells": PackedInt32Array(65535, 0, 55, 3, 2, 58, 65534, 65532, 56, 6, 0, 59, 65533, 65530, 60, 9, 65535, 57, 65531, 65534, 59, 65532, 2, 56, 65535, 4, 59, 2, 6, 56, 65535, 65529, 34, 65535, 65527, 1441809, 65535, 65523, 1441810, 9, 65520, 26, 16, 65520, 25, 13, 65512, 12, 13, 65517, 31, 13, 65519, 30, 13, 65521, 31, 13, 65523, 30, 13, 65525, 31, 13, 65527, 30, 13, 65529, 32, 13, 65531, 33, 5, 65520, 27, 15, 65517, 41, 11, 65517, 2, 11, 65519, 44, 16, 65523, 11, 10, 0, 14, 14, 0, 17, 18, 0, 13, 5, 5, 60, 6, 3, 57, 19, 65515, 51, 21, 65512, 53, 19, 65512, 54, 3, 65516, 48, 18, 65514, 40, 18, 65515, 42, 20, 65516, 43, 21, 65513, 45, 3, 65518, 36, 19, 65523, 35, 10, 65506, 13, 14, 65506, 17, 18, 65506, 14, 22, 65508, 1441805, 22, 65512, 1441809, 22, 65516, 1441805, 22, 65520, 1441810, 22, 65524, 1441806, 22, 65528, 1441809, 22, 65532, 1441805, 21, 65506, 1441845, 20, 65505, 1441843, 21, 65505, 1441846, 21, 65503, 1441845, 23, 65507, 1441843, 23, 65506, 1441846, 21, 65535, 1441844, 8, 65507, 1048628, 7, 65508, 1048590, 5, 65510, 18, 1, 65510, 13, 65535, 65512, 1441809, 65535, 65516, 1441810, 65535, 65520, 1441809)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="Skeleton Minion" parent="Enemies" instance=ExtResource("3_vmtyv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -10)
+
+[node name="Skeleton Mage" parent="Enemies" instance=ExtResource("4_2c112")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -18)
+
+[node name="Skeleton Rogue" parent="Enemies" instance=ExtResource("5_s5s6c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -17)
+
+[node name="Skeleton Warrior" parent="Enemies" instance=ExtResource("6_ni8s3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -12)
+
+[node name="Player Start" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_d6sej")

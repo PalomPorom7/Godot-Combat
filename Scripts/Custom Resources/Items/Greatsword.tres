@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=4 format=3 uid="uid://16u6u1vb512"]
+
+[ext_resource type="Script" path="res://Scripts/Custom Resources/Items/equipment.gd" id="1_1ygyg"]
+[ext_resource type="Texture2D" uid="uid://dnhnfs5nacqbg" path="res://Imported Assets/Icons/#1 - Transparent Icons.png" id="1_er4pq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dccax"]
+atlas = ExtResource("1_er4pq")
+region = Rect2(128, 160, 32, 32)
+
+[resource]
+script = ExtResource("1_1ygyg")
+type = 0
+name = "Greatsword"
+description = "This can slice a whole person in half!"
+value = 1
+icon = SubResource("AtlasTexture_dccax")
+scene = "res://Scenes/Items/greatsword.tscn"
+is_usable = false
+is_consumed_on_use = false

@@ -1,0 +1,501 @@
+[gd_scene load_steps=44 format=3 uid="uid://dil80q73hnvbt"]
+
+[ext_resource type="Script" path="res://Scripts/Managers/game_manager.gd" id="1_8pybo"]
+[ext_resource type="Script" path="res://Scripts/Player/player.gd" id="2_16ona"]
+[ext_resource type="PackedScene" uid="uid://dujtkfkjn3agj" path="res://Scenes/Levels/graveyard.tscn" id="2_ljeyd"]
+[ext_resource type="PackedScene" uid="uid://dsgxki7n5lrmk" path="res://Scenes/Characters/barbarian.tscn" id="3_2iql4"]
+[ext_resource type="Script" path="res://Scripts/Player/spring_arm.gd" id="3_u51m3"]
+[ext_resource type="Script" path="res://Scripts/Player/pick_up_radius.gd" id="5_8r4qp"]
+[ext_resource type="Theme" uid="uid://b1vv3jre6npvq" path="res://Themes/menu_buttons.tres" id="6_1b651"]
+[ext_resource type="Script" path="res://Scripts/UI/menu.gd" id="6_dr2w1"]
+[ext_resource type="Script" path="res://Scripts/Managers/event_manager.gd" id="6_lq361"]
+[ext_resource type="Script" path="res://Scripts/Events/camera.gd" id="7_dbeox"]
+[ext_resource type="Script" path="res://Scripts/UI/wallet.gd" id="8_fiawx"]
+[ext_resource type="Script" path="res://Scripts/UI/fade.gd" id="8_v3vli"]
+[ext_resource type="Script" path="res://Scripts/UI/dialog.gd" id="9_72i8y"]
+[ext_resource type="PackedScene" uid="uid://cjk5t1el4suya" path="res://Scenes/UI/settings_menu.tscn" id="9_iopaj"]
+[ext_resource type="Texture2D" uid="uid://b8xkq2nlu8ff6" path="res://Imported Assets/UI/BoxesBanners/Box_Orange_Rounded.png" id="9_pkuuh"]
+[ext_resource type="Texture2D" uid="uid://cj1rbj0sacwn3" path="res://Imported Assets/UI/Icons/Icon_Small_Coin.png" id="9_xcrha"]
+[ext_resource type="Texture2D" uid="uid://dj7v5xjevsp4u" path="res://Imported Assets/UI/Icons/Icon_Small_Blank_Arrow.png" id="10_1khn6"]
+[ext_resource type="FontFile" uid="uid://cal1olhubng48" path="res://Imported Assets/Fonts/Celtica-Book.ttf" id="10_p2meq"]
+[ext_resource type="FontFile" uid="uid://dtdebvoxhhvdr" path="res://Imported Assets/Fonts/MorrisRomanBlack.ttf" id="11_j2tnh"]
+[ext_resource type="AudioStream" uid="uid://c0vmmi2jew2o7" path="res://Imported Assets/Sound Effects/Coins/699496__valenspire__coin_drop_01.wav" id="11_r4v68"]
+[ext_resource type="Theme" uid="uid://bcup1tk2k3uvp" path="res://Themes/inventory.tres" id="13_ubryb"]
+[ext_resource type="Script" path="res://Scripts/UI/inventory.gd" id="14_1yu1s"]
+[ext_resource type="PackedScene" uid="uid://ovkq88civi8k" path="res://Scenes/Enemies/Minion.tscn" id="23_21c5t"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7hssf"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_14at1"]
+height = 3.1
+radius = 2.0
+
+[sub_resource type="Curve" id="Curve_xql5y"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.503311, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jkq2n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wic5t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2yii4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fcxws"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7k1sd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x06dg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yaw85"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q3lu3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_74rl3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lvgq5"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tlh2x"]
+texture = ExtResource("9_pkuuh")
+texture_margin_left = 256.0
+texture_margin_top = 256.0
+texture_margin_right = 256.0
+texture_margin_bottom = 256.0
+
+[sub_resource type="Theme" id="Theme_rfyhr"]
+default_font = ExtResource("11_j2tnh")
+default_font_size = 32
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_disabled_color = Color(0.501961, 0.501961, 0.501961, 0.501961)
+Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/constants/outline_size = 2
+Button/styles/disabled = SubResource("StyleBoxEmpty_x06dg")
+Button/styles/focus = SubResource("StyleBoxEmpty_yaw85")
+Button/styles/hover = SubResource("StyleBoxEmpty_q3lu3")
+Button/styles/normal = SubResource("StyleBoxEmpty_74rl3")
+Button/styles/pressed = SubResource("StyleBoxEmpty_lvgq5")
+Label/colors/font_color = Color(0.501961, 0.25098, 0.12549, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 1)
+Label/fonts/font = ExtResource("10_p2meq")
+Panel/styles/panel = SubResource("StyleBoxTexture_tlh2x")
+RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eq3vi"]
+texture = ExtResource("10_1khn6")
+modulate_color = Color(0, 1, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ap2oq"]
+texture = ExtResource("10_1khn6")
+modulate_color = Color(0.501961, 0.501961, 0.501961, 0.501961)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xmhg5"]
+texture = ExtResource("10_1khn6")
+modulate_color = Color(1, 1, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hne42"]
+texture = ExtResource("10_1khn6")
+modulate_color = Color(0, 0.501961, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_md7i5"]
+texture = ExtResource("10_1khn6")
+
+[node name="Game" type="Node3D" node_paths=PackedStringArray("_character", "_settings_menu", "_fade")]
+script = ExtResource("1_8pybo")
+_character = NodePath("Character")
+_settings_menu = NodePath("UI/Settings Menu")
+_fade = NodePath("UI/Fade")
+
+[node name="Graveyard" parent="." instance=ExtResource("2_ljeyd")]
+
+[node name="Character" parent="." node_paths=PackedStringArray("lock_on_target") instance=ExtResource("3_2iql4")]
+unique_name_in_owner = true
+lock_on_target = NodePath("../Minion")
+
+[node name="SpringArm" type="SpringArm3D" parent="Character"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("BoxShape3D_7hssf")
+spring_length = 5.0
+script = ExtResource("3_u51m3")
+_rotation_speed = 0.1
+
+[node name="Camera" type="Camera3D" parent="Character/SpringArm"]
+unique_name_in_owner = true
+h_offset = 1.0
+
+[node name="Pick Up Radius" type="Area3D" parent="Character"]
+collision_layer = 0
+collision_mask = 32
+monitorable = false
+script = ExtResource("5_8r4qp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Character/Pick Up Radius"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
+shape = SubResource("CylinderShape3D_14at1")
+
+[node name="RayCast3D" type="RayCast3D" parent="Character/Pick Up Radius"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+collision_mask = 33
+
+[node name="Player" type="Node" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+script = ExtResource("2_16ona")
+
+[node name="Event Manager" type="Node" parent="."]
+script = ExtResource("6_lq361")
+
+[node name="Camera3D" type="Camera3D" parent="Event Manager"]
+script = ExtResource("7_dbeox")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Wallet" type="HBoxContainer" parent="UI"]
+unique_name_in_owner = true
+offset_left = 32.0
+offset_top = -42.0
+offset_right = 336.0
+script = ExtResource("8_fiawx")
+_on_screen_position = Vector2(32, 32)
+_off_screen_position = Vector2(32, -42)
+_trans_type = 6
+
+[node name="Icon" type="TextureRect" parent="UI/Wallet"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+texture = ExtResource("9_xcrha")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Counter" type="Label" parent="UI/Wallet"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("11_j2tnh")
+theme_override_font_sizes/font_size = 48
+text = "9999999"
+vertical_alignment = 1
+
+[node name="Autohide" type="Timer" parent="UI/Wallet"]
+wait_time = 3.0
+one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/Wallet"]
+stream = ExtResource("11_r4v68")
+bus = &"SFX"
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="UI/Wallet"]
+position = Vector2(21, 21)
+emitting = false
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("9_xcrha")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 16.0
+initial_velocity_max = 32.0
+scale_amount_min = 0.05
+scale_amount_max = 0.05
+scale_amount_curve = SubResource("Curve_xql5y")
+
+[node name="Inventory" type="Panel" parent="UI"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1280.0
+offset_top = -720.0
+offset_right = 1280.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(1280, 720)
+theme = ExtResource("13_ubryb")
+script = ExtResource("14_1yu1s")
+
+[node name="Title" type="Label" parent="UI/Inventory"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.1
+anchor_right = 0.5
+anchor_bottom = 0.1
+offset_right = 40.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("10_p2meq")
+theme_override_font_sizes/font_size = 128
+text = "Inventory"
+
+[node name="Info" type="VBoxContainer" parent="UI/Inventory"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.6
+anchor_top = 0.2
+anchor_right = 0.95
+anchor_bottom = 0.9
+theme_override_constants/separation = 64
+
+[node name="Item Name" type="Label" parent="UI/Inventory/Info"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("10_p2meq")
+autowrap_mode = 2
+
+[node name="Item Description" type="Label" parent="UI/Inventory/Info"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_vertical = 3
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Inventory/Info"]
+layout_mode = 2
+
+[node name="Auxiliary" type="Button" parent="UI/Inventory/Info/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jkq2n")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_wic5t")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_2yii4")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_fcxws")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7k1sd")
+text = "X Use"
+
+[node name="Drop" type="Button" parent="UI/Inventory/Info/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jkq2n")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_wic5t")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_2yii4")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_fcxws")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7k1sd")
+text = "Y Drop"
+
+[node name="Shop" type="VBoxContainer" parent="UI/Inventory"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.6
+anchor_top = 0.2
+anchor_right = 0.95
+anchor_bottom = 0.9
+theme_override_constants/separation = 64
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/Inventory/Shop"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="UI/Inventory/Shop/ScrollContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Inventory/Shop"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Coin Icon" type="TextureRect" parent="UI/Inventory/Shop/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("9_xcrha")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Price" type="Label" parent="UI/Inventory/Shop/HBoxContainer"]
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+text = "0"
+
+[node name="Transaction" type="Button" parent="UI/Inventory/Shop/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jkq2n")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_wic5t")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_2yii4")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_fcxws")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7k1sd")
+text = "X Buy"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/Inventory"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.2
+anchor_right = 0.58
+anchor_bottom = 0.9
+
+[node name="GridContainer" type="GridContainer" parent="UI/Inventory/ScrollContainer"]
+layout_mode = 2
+columns = 5
+
+[node name="Close" type="Button" parent="UI/Inventory"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -128.0
+offset_bottom = 128.0
+grow_horizontal = 0
+theme_type_variation = &"CloseButton"
+
+[node name="Dialog" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchor_top = 0.667
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_rfyhr")
+script = ExtResource("9_72i8y")
+
+[node name="Box" type="Panel" parent="UI/Dialog"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 240.24
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+
+[node name="Continue" type="Button" parent="UI/Dialog/Box"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -176.48
+offset_right = -24.0
+offset_bottom = -22.48
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/focus = SubResource("StyleBoxTexture_eq3vi")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_ap2oq")
+theme_override_styles/hover = SubResource("StyleBoxTexture_xmhg5")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_hne42")
+theme_override_styles/normal = SubResource("StyleBoxTexture_md7i5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Dialog"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 32.0
+offset_right = 1216.0
+offset_bottom = 218.0
+
+[node name="Speaker" type="Label" parent="UI/Dialog/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Somebody"
+
+[node name="Dialogue" type="RichTextLabel" parent="UI/Dialog/VBoxContainer"]
+clip_contents = false
+layout_mode = 2
+bbcode_enabled = true
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+fit_content = true
+
+[node name="Options" type="VBoxContainer" parent="UI/Dialog"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 128.0
+offset_top = -144.0
+offset_right = 243.0
+offset_bottom = -25.0
+grow_vertical = 0
+theme_override_constants/separation = 12
+
+[node name="Option 0" type="Button" parent="UI/Dialog/Options"]
+layout_mode = 2
+text = "Option 0"
+alignment = 0
+
+[node name="Option 1" type="Button" parent="UI/Dialog/Options"]
+layout_mode = 2
+text = "Option 1"
+alignment = 0
+
+[node name="Option 2" type="Button" parent="UI/Dialog/Options"]
+layout_mode = 2
+text = "Option 2"
+alignment = 0
+
+[node name="Pause Menu" type="VBoxContainer" parent="UI" node_paths=PackedStringArray("_default_focus_item")]
+process_mode = 2
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.5
+offset_top = -46.5
+offset_right = 39.5
+offset_bottom = 46.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_1b651")
+script = ExtResource("6_dr2w1")
+_default_focus_item = NodePath("Continue")
+
+[node name="Title" type="Label" parent="UI/Pause Menu"]
+layout_mode = 2
+text = "Pause"
+horizontal_alignment = 1
+
+[node name="Continue" type="Button" parent="UI/Pause Menu"]
+layout_mode = 2
+text = "Continue"
+
+[node name="Settings" type="Button" parent="UI/Pause Menu"]
+layout_mode = 2
+text = "Settings"
+
+[node name="Exit" type="Button" parent="UI/Pause Menu"]
+layout_mode = 2
+text = "Exit"
+
+[node name="Settings Menu" parent="UI" instance=ExtResource("9_iopaj")]
+visible = false
+
+[node name="Fade" type="ColorRect" parent="UI"]
+process_mode = 3
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("8_v3vli")
+
+[node name="Minion" parent="." instance=ExtResource("23_21c5t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91355, 0, -1.76266)
+
+[connection signal="body_entered" from="Character/Pick Up Radius" to="Character/Pick Up Radius" method="_on_body_entered"]
+[connection signal="body_exited" from="Character/Pick Up Radius" to="Character/Pick Up Radius" method="_on_body_exited"]
+[connection signal="timeout" from="UI/Wallet/Autohide" to="UI/Wallet" method="close"]
+[connection signal="pressed" from="UI/Inventory/Info/HBoxContainer/Auxiliary" to="UI/Inventory" method="_on_auxiliary_pressed"]
+[connection signal="pressed" from="UI/Inventory/Info/HBoxContainer/Drop" to="UI/Inventory" method="_on_drop_pressed"]
+[connection signal="focus_entered" from="UI/Inventory/Shop/HBoxContainer/Transaction" to="UI/Inventory" method="_on_action_button_focus_entered"]
+[connection signal="pressed" from="UI/Inventory/Shop/HBoxContainer/Transaction" to="UI/Inventory" method="_on_transaction_pressed"]
+[connection signal="pressed" from="UI/Inventory/Close" to="UI/Inventory" method="close"]
+[connection signal="pressed" from="UI/Dialog/Box/Continue" to="UI/Dialog" method="_on_continue_pressed"]
+[connection signal="pressed" from="UI/Dialog/Options/Option 0" to="UI/Dialog" method="_on_option_pressed" binds= [0]]
+[connection signal="pressed" from="UI/Dialog/Options/Option 1" to="UI/Dialog" method="_on_option_pressed" binds= [1]]
+[connection signal="pressed" from="UI/Dialog/Options/Option 2" to="UI/Dialog" method="_on_option_pressed" binds= [2]]
+[connection signal="pressed" from="UI/Pause Menu/Continue" to="." method="toggle_pause"]
+[connection signal="pressed" from="UI/Pause Menu/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="UI/Pause Menu/Exit" to="." method="_on_exit_pressed"]

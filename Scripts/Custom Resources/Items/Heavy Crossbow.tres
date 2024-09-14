@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=4 format=3 uid="uid://dglta7lopu2ji"]
+
+[ext_resource type="Script" path="res://Scripts/Custom Resources/Items/equipment.gd" id="1_0stgq"]
+[ext_resource type="Texture2D" uid="uid://dnhnfs5nacqbg" path="res://Imported Assets/Icons/#1 - Transparent Icons.png" id="1_qmh4s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2t3q"]
+atlas = ExtResource("1_qmh4s")
+region = Rect2(128, 192, 32, 32)
+
+[resource]
+script = ExtResource("1_0stgq")
+type = 0
+name = "Heavy Crossbow"
+description = "Just point and shoot!"
+value = 1
+icon = SubResource("AtlasTexture_k2t3q")
+scene = "res://Scenes/Items/heavy_crossbow.tscn"
+is_usable = false
+is_consumed_on_use = false

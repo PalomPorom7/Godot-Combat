@@ -5,6 +5,8 @@ extends Node
 @onready var _character : CharacterBody3D = %Character
 @onready var _spring_arm : SpringArm3D = %SpringArm
 @onready var _camera : Camera3D = %Camera
+@onready var _target_indicator : Sprite3D = $"Target Indicator"
+var _target : Node3D
 
 # The direction of WASD or left analog stick input.
 var _input_direction : Vector2
@@ -38,7 +40,28 @@ func _input(event : InputEvent):
 func _camera_inputs(event : InputEvent):
 	# Free movement of camera with the mouse
 	if event is InputEventMouseMotion:
-		_spring_arm.look(event.relative)
+		_spring_arm.look(event.relative * get_process_delta_time())
+	if event.is_action_pressed("toggle_lock"):
+		if _target:
+			# if pressing down, force lock off
+			if _input_direction.dot(Vector2.DOWN) > 0.75:
+				toggle_lock(true)
+			else:
+				toggle_lock()
+		else:
+			toggle_lock()
+			if not _target:
+				_spring_arm.position_camera_behind_character()
+
+func toggle_lock(force_off : bool = false):
+	_target = null if force_off else _camera.get_nearest_visible_target(_target)
+	if _target:
+		_target_indicator.reparent(_target)
+		_target_indicator.position = Vector3.UP * 3
+		_target_indicator.visible = true
+	else:
+		_target_indicator.reparent(self)
+		_target_indicator.visible = false
 
 # Input events that control the character.
 func _character_inputs(event : InputEvent):
@@ -58,7 +81,7 @@ func _process(_delta : float):
 		return
 
 	# Free movement of the camera with the right analog stick on controller
-	_spring_arm.look(Input.get_vector("look_left", "look_right", "look_up", "look_down") * 20)
+	_spring_arm.look(Input.get_vector("look_left", "look_right", "look_up", "look_down"))
 
 	# Character movement with left analog stick or WASD keys, from the perspective of the camera
 	_input_direction = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")

@@ -1,12 +1,14 @@
-[gd_scene load_steps=19 format=3 uid="uid://dil80q73hnvbt"]
+[gd_scene load_steps=21 format=3 uid="uid://dil80q73hnvbt"]
 
 [ext_resource type="Script" path="res://Scripts/Managers/game_manager.gd" id="1_8pybo"]
 [ext_resource type="Script" path="res://Scripts/Player/player.gd" id="2_16ona"]
 [ext_resource type="PackedScene" uid="uid://dujtkfkjn3agj" path="res://Scenes/Levels/graveyard.tscn" id="2_ljeyd"]
 [ext_resource type="PackedScene" uid="uid://dsgxki7n5lrmk" path="res://Scenes/Characters/barbarian.tscn" id="3_2iql4"]
 [ext_resource type="Script" path="res://Scripts/Player/spring_arm.gd" id="3_u51m3"]
+[ext_resource type="Script" path="res://Scripts/Player/camera.gd" id="5_miy8h"]
 [ext_resource type="Theme" uid="uid://b1vv3jre6npvq" path="res://Themes/menu_buttons.tres" id="6_1b651"]
 [ext_resource type="Script" path="res://Scripts/UI/menu.gd" id="6_dr2w1"]
+[ext_resource type="Texture2D" uid="uid://bnhjg5tfacvsu" path="res://Imported Assets/UI/Sliders/ScrollBar_Blank_Pointer.png" id="7_64lyy"]
 [ext_resource type="Script" path="res://Scripts/UI/fade.gd" id="8_v3vli"]
 [ext_resource type="FontFile" uid="uid://cal1olhubng48" path="res://Imported Assets/Fonts/Celtica-Book.ttf" id="10_p2meq"]
 [ext_resource type="Theme" uid="uid://bcup1tk2k3uvp" path="res://Themes/inventory.tres" id="13_ubryb"]
@@ -14,10 +16,8 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7hssf"]
 
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_c8xwr"]
-dof_blur_far_enabled = true
-dof_blur_far_distance = 20.0
-dof_blur_far_transition = 10.0
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_psbgi"]
+points = PackedVector3Array(0, 0, 0, 11.4, 6.4, -15, 11.4, -6.4, -15, -11.4, -6.4, -15, -11.4, 6.4, -15)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jkq2n"]
 
@@ -36,7 +36,7 @@ script = ExtResource("1_8pybo")
 
 [node name="Character" parent="." instance=ExtResource("3_2iql4")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.19977, 0, -6.67728)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5)
 
 [node name="SpringArm" type="SpringArm3D" parent="Character"]
 unique_name_in_owner = true
@@ -47,13 +47,31 @@ script = ExtResource("3_u51m3")
 
 [node name="Camera" type="Camera3D" parent="Character/SpringArm"]
 unique_name_in_owner = true
-attributes = SubResource("CameraAttributesPractical_c8xwr")
 h_offset = 1.0
+script = ExtResource("5_miy8h")
+
+[node name="Target Range" type="Area3D" parent="Character/SpringArm/Camera"]
+collision_layer = 0
+collision_mask = 1024
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Character/SpringArm/Camera/Target Range"]
+shape = SubResource("ConvexPolygonShape3D_psbgi")
+
+[node name="Line of Sight" type="RayCast3D" parent="Character/SpringArm/Camera"]
+collision_mask = 1025
 
 [node name="Player" type="Node" parent="."]
 unique_name_in_owner = true
 process_mode = 3
 script = ExtResource("2_16ona")
+
+[node name="Target Indicator" type="Sprite3D" parent="Player"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+visible = false
+billboard = 1
+no_depth_test = true
+texture = ExtResource("7_64lyy")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -192,6 +210,8 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 script = ExtResource("8_v3vli")
 
+[connection signal="body_entered" from="Character/SpringArm/Camera/Target Range" to="Character/SpringArm/Camera" method="_on_target_range_body_entered"]
+[connection signal="body_exited" from="Character/SpringArm/Camera/Target Range" to="Character/SpringArm/Camera" method="_on_target_range_body_exited"]
 [connection signal="focus_entered" from="UI/Inventory/Info/HBoxContainer/Button" to="UI/Inventory" method="_on_action_button_focus_entered"]
 [connection signal="pressed" from="UI/Inventory/Info/HBoxContainer/Button" to="UI/Inventory" method="_on_auxiliary_pressed"]
 [connection signal="pressed" from="UI/Inventory/Close" to="UI/Inventory" method="close"]

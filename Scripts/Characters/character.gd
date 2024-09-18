@@ -14,8 +14,10 @@ extends CharacterBody3D
 @export var _rotation_speed : float = PI * 2
 @onready var _movement_speed : float = _walking_speed
 var _input_direction : Vector3
+var _wants_to_face_direction : Vector3
 var _angle_difference : float
 var _xz_velocity : Vector3
+var _relative_velocity : Vector3
 var _can_move : bool = true:
 	set(new_value):
 		_can_move = new_value
@@ -33,6 +35,9 @@ var _jump_velocity : float
 # Equipment sockets; Main Hand, Off Hand, Head, Back
 @export_category("Equipment")
 @export var _sockets : Array[BoneAttachment3D]
+
+var _target : Node3D
+var _locked_on_blend : Vector2
 
 # Calculate the amount of force required to reach the desired jump height.
 func _ready():
@@ -92,8 +97,12 @@ func _apply_jump_velocity():
 func _physics_process(delta : float):
 	# If the player is giving movement input
 	if _input_direction:
-		# Face direction of input
-		_rotate_towards_direction(_input_direction, delta)
+		# Face direction of input or towards target
+		if _target:
+			_wants_to_face_direction = _target.global_position - global_position
+		else:
+			_wants_to_face_direction = _input_direction
+		_rotate_towards_direction(_wants_to_face_direction, delta)
 	# Copy the character's x and z velocity to isolate from y.
 	_xz_velocity = Vector3(velocity.x, 0, velocity.z)
 	# Do ground or air physics
@@ -126,7 +135,13 @@ func _ground_physics(delta : float):
 	else:
 		_xz_velocity = _xz_velocity.move_toward(Vector3.ZERO, _deceleration * delta)
 	# Tell the animation tree how to blend the locomotion animations
-	_animation.set("parameters/Locomotion/blend_position", _xz_velocity.length() / _running_speed)
+	_relative_velocity = _xz_velocity / _running_speed
+	if _target:
+		_locked_on_blend.x = _rig.global_basis.x.dot(_relative_velocity) * -1
+		_locked_on_blend.y = _rig.global_basis.z.dot(_relative_velocity)
+		_animation.set("parameters/Locomotion/Locked On/blend_position", _locked_on_blend)
+	else:
+		_animation.set("parameters/Locomotion/Not Locked On/blend_position", _relative_velocity.length())
 
 func _air_physics(delta : float):
 	# Add the gravity.
@@ -140,3 +155,6 @@ func _air_physics(delta : float):
 		_xz_velocity = _xz_velocity.move_toward(Vector3.ZERO, _deceleration * _air_brakes * delta)
 
 #endregion
+
+func _on_player_targeted(new_target : Node3D):
+	_target = new_target

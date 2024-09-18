@@ -210,8 +210,12 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 script = ExtResource("8_v3vli")
 
+[connection signal="target_exited_range" from="Character/SpringArm/Camera" to="Player" method="toggle_lock"]
 [connection signal="body_entered" from="Character/SpringArm/Camera/Target Range" to="Character/SpringArm/Camera" method="_on_target_range_body_entered"]
 [connection signal="body_exited" from="Character/SpringArm/Camera/Target Range" to="Character/SpringArm/Camera" method="_on_target_range_body_exited"]
+[connection signal="targeted" from="Player" to="Character" method="_on_player_targeted"]
+[connection signal="targeted" from="Player" to="Character/SpringArm" method="_on_player_targeted"]
+[connection signal="targeted" from="Player" to="Character/SpringArm/Camera" method="_on_player_targeted"]
 [connection signal="focus_entered" from="UI/Inventory/Info/HBoxContainer/Button" to="UI/Inventory" method="_on_action_button_focus_entered"]
 [connection signal="pressed" from="UI/Inventory/Info/HBoxContainer/Button" to="UI/Inventory" method="_on_auxiliary_pressed"]
 [connection signal="pressed" from="UI/Inventory/Close" to="UI/Inventory" method="close"]

@@ -5,6 +5,9 @@ var _visible_targets : Array[Node3D] = []
 var _current_distance : float
 var _nearest_distance : float
 var _nearest_index : int
+var _target : Node3D
+
+signal target_exited_range
 
 func get_nearest_visible_target(current_target : Node3D = null) -> Node3D:
 	if _visible_targets.size() == 0:
@@ -27,8 +30,19 @@ func get_nearest_visible_target(current_target : Node3D = null) -> Node3D:
 	else:
 		return _visible_targets[_nearest_index]
 
+func _process(_delta : float):
+	if _target:
+		look_at(_target.global_position + Vector3.UP)
+
 func _on_target_range_body_entered(body : Node3D):
 	_visible_targets.append(body)
 
 func _on_target_range_body_exited(body : Node3D):
 	_visible_targets.erase(body)
+	if body == _target:
+		target_exited_range.emit()
+
+func _on_player_targeted(new_target : Node3D):
+	_target = new_target
+	if not _target:
+		rotation = Vector3.ZERO

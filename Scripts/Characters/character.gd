@@ -3,7 +3,6 @@ extends CharacterBody3D
 # Components required to draw and animate the character.
 @onready var _rig : Node3D = $Rig
 @onready var _animation : AnimationTree = $AnimationTree
-@onready var _state : AnimationNodeStateMachinePlayback = _animation["parameters/playback"]
 
 # Variables for controlling how a character walks, runs, and rotates.
 @export_category("Locomotion")
@@ -36,8 +35,13 @@ var _jump_velocity : float
 @export_category("Equipment")
 @export var _sockets : Array[BoneAttachment3D]
 
+# Combat variables
 var _target : Node3D
 var _locked_on_blend : Vector2
+
+# Buffered Inputs
+var _wants_to_jump : bool
+var _wants_to_attack : bool
 
 # Calculate the amount of force required to reach the desired jump height.
 func _ready():
@@ -64,6 +68,9 @@ func doff(socket : int):
 
 #region Movement
 
+func restrict_movement(can_not_move : bool):
+	_can_move = not can_not_move
+
 # Tell this character to move in a direction, if they can.
 func move(direction : Vector3):
 	if not _can_move:
@@ -78,16 +85,30 @@ func run():
 
 # Tell this character to jump if they can.
 func jump():
-	# Characters can only jump if they are able to move and are on the floor.
-	if not _can_move or not is_on_floor():
-		return
-	# Tell the animation tree to transition to Jump Start state.
-	_state.travel("Jump_Start")
+	_wants_to_jump = true
+	_wants_to_attack = false
+
+func cancel_jump():
+	_wants_to_jump = false
 
 # Jump animation calls this function once the character's feet leave the ground.
 func _apply_jump_velocity():
 	if is_on_floor():
 		velocity.y = _jump_velocity
+
+#endregion
+
+#region Combat
+
+func _on_player_targeted(new_target : Node3D):
+	_target = new_target
+
+func attack():
+	_wants_to_attack = true
+	_wants_to_jump = false
+
+func cancel_attack():
+	_wants_to_attack = false
 
 #endregion
 
@@ -139,9 +160,10 @@ func _ground_physics(delta : float):
 	if _target:
 		_locked_on_blend.x = _rig.global_basis.x.dot(_relative_velocity) * -1
 		_locked_on_blend.y = _rig.global_basis.z.dot(_relative_velocity)
-		_animation.set("parameters/Locomotion/Locked On/blend_position", _locked_on_blend)
+		_animation.set_locked_on_blend(_locked_on_blend)
 	else:
-		_animation.set("parameters/Locomotion/Not Locked On/blend_position", _relative_velocity.length())
+		_animation.set_not_locked_on_blend(_relative_velocity.length())
+	_animation.character_is_moving(velocity != Vector3.ZERO)
 
 func _air_physics(delta : float):
 	# Add the gravity.
@@ -155,6 +177,3 @@ func _air_physics(delta : float):
 		_xz_velocity = _xz_velocity.move_toward(Vector3.ZERO, _deceleration * _air_brakes * delta)
 
 #endregion
-
-func _on_player_targeted(new_target : Node3D):
-	_target = new_target

@@ -150,6 +150,12 @@ toggle_lock={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":8,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
+attack={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(363, 19),"global_position":Vector2(372, 65),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":10,"pressure":0.0,"pressed":true,"script":null)
+]
+}
 
 [layer_names]
 

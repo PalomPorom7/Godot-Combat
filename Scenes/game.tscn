@@ -73,6 +73,9 @@ billboard = 1
 no_depth_test = true
 texture = ExtResource("7_64lyy")
 
+[node name="Input Buffer" type="Timer" parent="Player"]
+one_shot = true
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Inventory" type="Panel" parent="UI"]

@@ -6,6 +6,7 @@ extends Node
 @onready var _spring_arm : SpringArm3D = %SpringArm
 @onready var _camera : Camera3D = %Camera
 @onready var _target_indicator : Sprite3D = $"Target Indicator"
+@onready var _input_buffer : Timer = $"Input Buffer"
 var _target : Node3D:
 	set(new_target):
 		_target = new_target
@@ -78,6 +79,15 @@ func _character_inputs(event : InputEvent):
 	# Jump
 	if event.is_action_pressed("jump"):
 		_character.jump()
+		_input_buffer.start()
+		await _input_buffer.timeout
+		_character.cancel_jump()
+	# Attack
+	if event.is_action_pressed("attack"):
+		_character.attack()
+		_input_buffer.start()
+		await _input_buffer.timeout
+		_character.cancel_attack()
 
 # Every frame, ignoring delta time
 func _process(_delta : float):

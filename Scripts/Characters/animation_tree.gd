@@ -1,9 +1,14 @@
 extends AnimationTree
 
 @export var _blend_speed : float = 4
-var _action_state : AnimationNodeStateMachinePlayback = self["parameters/Action/playback"]
-var _blend_node : AnimationNodeBlend2 = tree_root.get_node("Lower+Upper")
+var _action_state : AnimationNodeStateMachinePlayback
+var _blend_node : AnimationNodeBlend2
 var _blend_amount : float = 0.01
+
+func _ready():
+	tree_root = tree_root.duplicate(true)
+	_action_state = self["parameters/Action/playback"]
+	_blend_node = tree_root.get_node("Lower+Upper")
 
 func character_is_moving(is_moving : bool):
 	_blend_node.filter_enabled = is_moving

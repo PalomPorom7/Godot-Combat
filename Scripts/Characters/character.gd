@@ -134,6 +134,7 @@ func _physics_process(delta : float):
 	# Apply adjusted xz velocity to the character
 	velocity.x = _xz_velocity.x
 	velocity.z = _xz_velocity.z
+	_animation.character_is_moving(velocity != Vector3.ZERO)
 
 	# Apply forces to the character for this frame
 	move_and_slide()
@@ -163,7 +164,6 @@ func _ground_physics(delta : float):
 		_animation.set_locked_on_blend(_locked_on_blend)
 	else:
 		_animation.set_not_locked_on_blend(_relative_velocity.length())
-	_animation.character_is_moving(velocity != Vector3.ZERO)
 
 func _air_physics(delta : float):
 	# Add the gravity.

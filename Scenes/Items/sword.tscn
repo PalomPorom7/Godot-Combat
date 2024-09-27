@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://b5hl6c71qyith"]
+[gd_scene load_steps=9 format=4 uid="uid://b5hl6c71qyith"]
 
 [ext_resource type="Script" path="res://Scripts/Items/weapon.gd" id="1_jukll"]
 [ext_resource type="Texture2D" uid="uid://bqiojayquwpmx" path="res://Imported Assets/Characters/Knight_knight_texture.png" id="1_n7vs0"]
@@ -47,6 +47,9 @@ shadow_mesh = SubResource("ArrayMesh_torva")
 [sub_resource type="BoxShape3D" id="BoxShape3D_l2ft3"]
 size = Vector3(0.510498, 1.75433, 0.158752)
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2rg1i"]
+height = 1.5
+
 [node name="Sword" type="RigidBody3D"]
 collision_layer = 32
 collision_mask = 801
@@ -60,3 +63,13 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00476074, 0.501617, -0.00234985)
 shape = SubResource("BoxShape3D_l2ft3")
+
+[node name="Hit Box" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 0
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hit Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("CapsuleShape3D_2rg1i")

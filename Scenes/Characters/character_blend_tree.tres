@@ -348,7 +348,6 @@ graph_offset = Vector2(-368, -261)
 filters = [".", "Rig/Skeleton3D:chest", "Rig/Skeleton3D:hand.l", "Rig/Skeleton3D:hand.r", "Rig/Skeleton3D:handslot.l", "Rig/Skeleton3D:handslot.r", "Rig/Skeleton3D:head", "Rig/Skeleton3D:lowerarm.l", "Rig/Skeleton3D:lowerarm.r", "Rig/Skeleton3D:spine", "Rig/Skeleton3D:upperarm.l", "Rig/Skeleton3D:upperarm.r", "Rig/Skeleton3D:wrist.l", "Rig/Skeleton3D:wrist.r"]
 
 [resource]
-graph_offset = Vector2(-772, 11)
 nodes/Action/node = SubResource("AnimationNodeStateMachine_1air6")
 nodes/Action/position = Vector2(-340, 280)
 nodes/Lower+Upper/node = SubResource("AnimationNodeBlend2_grob2")

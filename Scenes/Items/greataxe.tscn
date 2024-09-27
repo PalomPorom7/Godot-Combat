@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://deqnt3g3cdbk6"]
+[gd_scene load_steps=9 format=4 uid="uid://deqnt3g3cdbk6"]
 
 [ext_resource type="Texture2D" uid="uid://caxtjyslwx5eg" path="res://Imported Assets/Characters/Barbarian_barbarian_texture.png" id="1_075od"]
 [ext_resource type="Script" path="res://Scripts/Items/weapon.gd" id="1_knn8i"]
@@ -47,6 +47,9 @@ shadow_mesh = SubResource("ArrayMesh_bxgus")
 [sub_resource type="BoxShape3D" id="BoxShape3D_i8rl7"]
 size = Vector3(1.26605, 1.72321, 0.274414)
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_akcm4"]
+height = 1.5
+
 [node name="Greataxe" type="RigidBody3D"]
 collision_layer = 32
 collision_mask = 801
@@ -61,3 +64,13 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, -7.45058e-09, 0, 1, 7.45058e-09, -1.86265e-09, 0, 1, -0.00228882, 0.409027, -0.00244141)
 shape = SubResource("BoxShape3D_i8rl7")
+
+[node name="Hit Box" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 0
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hit Box"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_akcm4")

@@ -103,6 +103,12 @@ func _equip_selected_item():
 	if File.progress.equipment[_selected_item.type] != -1:
 		_character.doff(_selected_item.type)
 		_container.get_child(File.progress.equipment[_selected_item.type]).get_node("Label").visible = false
+	# If its a weapon is 2-handed or dual wield, remove off hand equipment.
+	if _selected_item is Weapon and (_selected_item.weapon_type == Enums.WeaponType.TWOHANDED_MELEE or _selected_item.weapon_type == Enums.WeaponType.DUAL_WIELD):
+		if File.progress.equipment[Enums.EquipmentType.OFF_HAND] != -1:
+			_container.get_children()[File.progress.equipment[Enums.EquipmentType.OFF_HAND]].get_node("Label").visible = false
+			File.progress.equipment[Enums.EquipmentType.OFF_HAND] = -1
+		_character.doff(Enums.EquipmentType.OFF_HAND)
 	# Set the data in the player's progress resource.
 	File.progress.equipment[_selected_item.type] = _container.get_children().find(_selected_button)
 	# Tell the character to put on the equipment.

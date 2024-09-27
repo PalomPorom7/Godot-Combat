@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=4 uid="uid://vqmycwbgymqx"]
 
-[ext_resource type="Script" path="res://Scripts/Items/item.gd" id="1_dqmth"]
+[ext_resource type="Script" path="res://Scripts/Items/weapon.gd" id="1_87lr1"]
 [ext_resource type="Texture2D" uid="uid://cmbisvu25p73w" path="res://Imported Assets/Characters/Rogue_rogue_texture.png" id="1_ltd18"]
 [ext_resource type="Resource" uid="uid://cr03bdgd14vpf" path="res://Scripts/Custom Resources/Items/Knife.tres" id="2_g1qqo"]
 
@@ -50,7 +50,7 @@ size = Vector3(0.245117, 1.22711, 0.178284)
 [node name="Knife" type="RigidBody3D"]
 collision_layer = 32
 collision_mask = 801
-script = ExtResource("1_dqmth")
+script = ExtResource("1_87lr1")
 resource = ExtResource("2_g1qqo")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

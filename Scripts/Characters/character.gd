@@ -34,8 +34,13 @@ var _jump_velocity : float
 # Equipment sockets; Main Hand, Off Hand, Head, Back
 @export_category("Equipment")
 @export var _sockets : Array[BoneAttachment3D]
+var _attack_animation : Enums.WeaponType
+var _main_hand : Node3D
+var _off_hand : Node3D
 
 # Combat variables
+@onready var _unarmed_hit_box : Area3D = get_node_or_null("Rig/Hit Box")
+@export_flags_3d_physics var _enemy_hurt_layer : int
 var _target : Node3D
 var _locked_on_blend : Vector2
 
@@ -46,6 +51,8 @@ var _wants_to_attack : bool
 # Calculate the amount of force required to reach the desired jump height.
 func _ready():
 	_jump_velocity = sqrt(_jump_height * _gravity * 2)
+	if _unarmed_hit_box:
+		_unarmed_hit_box.collision_mask = _enemy_hurt_layer
 
 # Which direction is the character rig facing in global space?
 func get_rig_rotation() -> Vector3:
@@ -58,9 +65,26 @@ func don(item : Equipment):
 	var instance : Node3D = load(item.scene).instantiate()
 	_sockets[item.type].add_child(instance)
 	instance.freeze = true
+	if item is Weapon:
+		_main_hand = instance
+		_main_hand.set_hit_box_collision_mask(_enemy_hurt_layer)
+		_attack_animation = item.weapon_type
+		if item.weapon_type == Enums.WeaponType.DUAL_WIELD:
+			instance = load(item.scene).instantiate()
+			_sockets[Enums.EquipmentType.OFF_HAND].add_child(instance)
+			instance.freeze = true
+			_off_hand = instance
+			_off_hand.set_hit_box_collision_mask(_enemy_hurt_layer)
 
 # Remove any piece of equipment in the designated socket.
 func doff(socket : int):
+	if socket == Enums.EquipmentType.MAIN_HAND:
+		_main_hand = null
+		if _attack_animation == Enums.WeaponType.DUAL_WIELD:
+			doff(Enums.EquipmentType.OFF_HAND)
+		_attack_animation = Enums.WeaponType.UNARMED
+	elif socket == Enums.EquipmentType.OFF_HAND:
+		_off_hand = null
 	if _sockets[socket].get_child_count() > 0:
 		_sockets[socket].get_child(0).queue_free()
 
@@ -109,6 +133,15 @@ func attack():
 
 func cancel_attack():
 	_wants_to_attack = false
+
+func activate_hit_box(active : bool, which_hand : int = 1):
+	match which_hand:
+		0:
+			_unarmed_hit_box.monitoring = active
+		1:
+			_main_hand.activate_hit_box(active)
+		2:
+			_off_hand.activate_hit_box(active)
 
 #endregion
 

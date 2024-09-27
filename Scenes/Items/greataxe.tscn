@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=4 uid="uid://deqnt3g3cdbk6"]
 
 [ext_resource type="Texture2D" uid="uid://caxtjyslwx5eg" path="res://Imported Assets/Characters/Barbarian_barbarian_texture.png" id="1_075od"]
-[ext_resource type="Script" path="res://Scripts/Items/item.gd" id="1_x7usk"]
+[ext_resource type="Script" path="res://Scripts/Items/weapon.gd" id="1_knn8i"]
 [ext_resource type="Resource" uid="uid://dsqmaxt37vqnf" path="res://Scripts/Custom Resources/Items/Greataxe.tres" id="2_erins"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l3gex"]
@@ -50,7 +50,7 @@ size = Vector3(1.26605, 1.72321, 0.274414)
 [node name="Greataxe" type="RigidBody3D"]
 collision_layer = 32
 collision_mask = 801
-script = ExtResource("1_x7usk")
+script = ExtResource("1_knn8i")
 resource = ExtResource("2_erins")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

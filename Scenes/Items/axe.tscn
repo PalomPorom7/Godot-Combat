@@ -1,8 +1,7 @@
 [gd_scene load_steps=8 format=4 uid="uid://fvdt6au8p3k5"]
 
+[ext_resource type="Script" path="res://Scripts/Items/weapon.gd" id="1_4qgbu"]
 [ext_resource type="Texture2D" uid="uid://caxtjyslwx5eg" path="res://Imported Assets/Characters/Barbarian_barbarian_texture.png" id="1_etmjl"]
-[ext_resource type="Script" path="res://Scripts/Items/item.gd" id="1_ter1p"]
-[ext_resource type="Resource" uid="uid://cfem52a6ytoe4" path="res://Scripts/Custom Resources/Items/Axe.tres" id="2_oi2o7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jsnr8"]
 size = Vector3(0.75, 1.25, 0.2)
@@ -47,11 +46,12 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ioufu")
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_1x2tp"]
+
 [node name="Axe" type="RigidBody3D"]
 collision_layer = 32
 collision_mask = 801
-script = ExtResource("1_ter1p")
-resource = ExtResource("2_oi2o7")
+script = ExtResource("1_4qgbu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.225, 0.35, 0)
@@ -60,3 +60,13 @@ shape = SubResource("BoxShape3D_jsnr8")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_01yyi")
 skeleton = NodePath("")
+
+[node name="Hit Box" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 0
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hit Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.667, 0)
+shape = SubResource("SphereShape3D_1x2tp")

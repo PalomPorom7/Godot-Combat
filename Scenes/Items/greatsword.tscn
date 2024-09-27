@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=4 uid="uid://d2jwaqedp1v7g"]
 
-[ext_resource type="Script" path="res://Scripts/Items/item.gd" id="1_bg01y"]
+[ext_resource type="Script" path="res://Scripts/Items/weapon.gd" id="1_57sv5"]
 [ext_resource type="Texture2D" uid="uid://bqiojayquwpmx" path="res://Imported Assets/Characters/Knight_knight_texture.png" id="1_yex83"]
 [ext_resource type="Resource" uid="uid://16u6u1vb512" path="res://Scripts/Custom Resources/Items/Greatsword.tres" id="2_vr4uh"]
 
@@ -50,7 +50,7 @@ size = Vector3(0.828064, 2.36328, 0.259766)
 [node name="Greatsword" type="RigidBody3D"]
 collision_layer = 32
 collision_mask = 801
-script = ExtResource("1_bg01y")
+script = ExtResource("1_57sv5")
 resource = ExtResource("2_vr4uh")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

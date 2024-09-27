@@ -8,3 +8,11 @@ enum EquipmentType
 	HEAD,
 	BACK
 }
+
+enum WeaponType
+{
+	UNARMED,			# 0
+	ONEHANDED_MELEE,	# 1
+	TWOHANDED_MELEE,	# 2
+	DUAL_WIELD			# 3
+}

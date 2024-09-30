@@ -10,6 +10,7 @@ region = Rect2(352, 160, 32, 32)
 [resource]
 script = ExtResource("2_t8hwe")
 weapon_type = 2
+damage = 5
 type = 0
 name = "Greataxe"
 description = "It's larger and slower than a normal axe."

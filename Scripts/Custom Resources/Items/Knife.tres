@@ -10,6 +10,7 @@ region = Rect2(288, 160, 32, 32)
 [resource]
 script = ExtResource("2_ujyg8")
 weapon_type = 3
+damage = 2
 type = 0
 name = "Knife"
 description = "Don't bring a spoon to a knife fight."

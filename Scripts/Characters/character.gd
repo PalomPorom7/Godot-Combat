@@ -39,14 +39,23 @@ var _main_hand : Node3D
 var _off_hand : Node3D
 
 # Combat variables
+@export_category("Combat")
+@export var _max_health : int = 5
+@onready var _current_health : int = _max_health
 @onready var _unarmed_hit_box : Area3D = get_node_or_null("Rig/Hit Box")
 @export_flags_3d_physics var _enemy_hurt_layer : int
+@onready var _hurt_box : Area3D = $"Hurt Box"
+var _is_dead : bool
+var _from_behind : bool
 var _target : Node3D
 var _locked_on_blend : Vector2
 
 # Buffered Inputs
 var _wants_to_jump : bool
 var _wants_to_attack : bool
+
+signal health_changed(percentage : float)
+signal died
 
 # Calculate the amount of force required to reach the desired jump height.
 func _ready():
@@ -67,6 +76,7 @@ func don(item : Equipment):
 	instance.freeze = true
 	if item is Weapon:
 		_main_hand = instance
+		_main_hand.damage = item.damage
 		_main_hand.set_hit_box_collision_mask(_enemy_hurt_layer)
 		_attack_animation = item.weapon_type
 		if item.weapon_type == Enums.WeaponType.DUAL_WIELD:
@@ -74,6 +84,7 @@ func don(item : Equipment):
 			_sockets[Enums.EquipmentType.OFF_HAND].add_child(instance)
 			instance.freeze = true
 			_off_hand = instance
+			_off_hand.damage = item.damage
 			_off_hand.set_hit_box_collision_mask(_enemy_hurt_layer)
 
 # Remove any piece of equipment in the designated socket.
@@ -142,6 +153,34 @@ func activate_hit_box(active : bool, which_hand : int = 1):
 			_main_hand.activate_hit_box(active)
 		2:
 			_off_hand.activate_hit_box(active)
+
+func _on_hit_box_area_entered(hurt_box : Area3D):
+	hurt_box.get_parent().take_damage(1, (global_position - hurt_box.global_position).normalized())
+
+func take_damage(amount : int, direction : Vector3 = Vector3.ZERO):
+	_current_health = max(_current_health - amount, 0)
+	_interrupt_actions()
+	health_changed.emit(float(_current_health) / _max_health)
+	_from_behind = direction.dot(_rig.global_basis.z) < 0
+	if _current_health == 0:
+		_is_dead = true
+		died.emit()
+		collision_layer = 0
+		collision_mask = 1
+		_hurt_box.set_deferred("monitorable", false)
+	else:
+		_animation.get_hit(amount < 2)
+
+func _interrupt_actions():
+	deactivate_all_hit_boxes()
+
+func deactivate_all_hit_boxes():
+	if _unarmed_hit_box:
+		_unarmed_hit_box.monitoring = false
+	if _main_hand:
+		_main_hand.activate_hit_box(false)
+	if _off_hand:
+		_off_hand.activate_hit_box(false)
 
 #endregion
 

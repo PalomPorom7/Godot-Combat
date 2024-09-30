@@ -73,3 +73,5 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hit Box"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_0ufbj")
+
+[connection signal="area_entered" from="Hit Box" to="." method="_on_hit_box_area_entered"]

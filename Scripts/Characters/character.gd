@@ -46,13 +46,19 @@ var _off_hand : Node3D
 @export_flags_3d_physics var _enemy_hurt_layer : int
 @onready var _hurt_box : Area3D = $"Hurt Box"
 var _is_dead : bool
+@export var _is_attacking : bool
+@export var _is_dodging : bool
+@export var _is_hit : bool
 var _from_behind : bool
 var _target : Node3D
 var _locked_on_blend : Vector2
+@export var _dodge_force : float = 8
+var _dodge_direction : Vector3
 
 # Buffered Inputs
 var _wants_to_jump : bool
 var _wants_to_attack : bool
+var _wants_to_dodge : bool
 
 signal health_changed(percentage : float)
 signal died
@@ -122,6 +128,7 @@ func run():
 func jump():
 	_wants_to_jump = true
 	_wants_to_attack = false
+	_wants_to_dodge = false
 
 func cancel_jump():
 	_wants_to_jump = false
@@ -141,6 +148,7 @@ func _on_player_targeted(new_target : Node3D):
 func attack():
 	_wants_to_attack = true
 	_wants_to_jump = false
+	_wants_to_dodge = false
 
 func cancel_attack():
 	_wants_to_attack = false
@@ -164,6 +172,7 @@ func take_damage(amount : int, direction : Vector3 = Vector3.ZERO):
 	_from_behind = direction.dot(_rig.global_basis.z) < 0
 	if _current_health == 0:
 		_is_dead = true
+		_is_hit = false
 		died.emit()
 		collision_layer = 0
 		collision_mask = 1
@@ -171,8 +180,31 @@ func take_damage(amount : int, direction : Vector3 = Vector3.ZERO):
 	else:
 		_animation.get_hit(amount < 2)
 
+func dodge():
+	_wants_to_dodge = true
+	_wants_to_jump = false
+	_wants_to_attack = false
+	if _input_direction == Vector3.ZERO:
+		_dodge_direction = _rig.global_basis.z * -1
+	else:
+		_dodge_direction = _input_direction.normalized()
+	_animation.set_dodge_blend(Vector2(_dodge_direction.dot(_rig.global_basis.x) * -1, _dodge_direction.dot(_rig.global_basis.z)))
+
+func cancel_dodge():
+	_wants_to_dodge = false
+
+func apply_dodge_velocity():
+	_wants_to_dodge = false
+	velocity = _dodge_direction * _dodge_force
+
+func activate_hurt_box(active : bool):
+	_hurt_box.set_deferred("monitorable", active)
+
 func _interrupt_actions():
+	_is_attacking = false
+	_is_dodging = false
 	deactivate_all_hit_boxes()
+	activate_hurt_box(true)
 
 func deactivate_all_hit_boxes():
 	if _unarmed_hit_box:

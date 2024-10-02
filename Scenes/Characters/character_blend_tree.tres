@@ -260,7 +260,7 @@ advance_expression = "_attack_animation != 0 or (not _target and not _wants_to_a
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1a3rn"]
 advance_mode = 2
-advance_expression = "_wants_to_attack"
+advance_expression = "_wants_to_attack and not _is_hit and not _is_dodging"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sotu6"]
 switch_mode = 2
@@ -268,7 +268,7 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hab5k"]
 advance_mode = 2
-advance_expression = "_wants_to_attack"
+advance_expression = "_wants_to_attack and not _is_hit and not _is_dodging"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7lmaf"]
 switch_mode = 2
@@ -276,7 +276,7 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_inonr"]
 advance_mode = 2
-advance_expression = "_wants_to_attack"
+advance_expression = "_wants_to_attack and not _is_hit and not _is_dodging"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g3w1r"]
 switch_mode = 2
@@ -284,7 +284,7 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_80i5q"]
 advance_mode = 2
-advance_expression = "_wants_to_attack"
+advance_expression = "_wants_to_attack and not _is_hit and not _is_dodging"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_08m05"]
 switch_mode = 2
@@ -345,9 +345,10 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(-368, -261)
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_grob2"]
-filters = [".", "Rig/Skeleton3D:chest", "Rig/Skeleton3D:hand.l", "Rig/Skeleton3D:hand.r", "Rig/Skeleton3D:handslot.l", "Rig/Skeleton3D:handslot.r", "Rig/Skeleton3D:head", "Rig/Skeleton3D:lowerarm.l", "Rig/Skeleton3D:lowerarm.r", "Rig/Skeleton3D:spine", "Rig/Skeleton3D:upperarm.l", "Rig/Skeleton3D:upperarm.r", "Rig/Skeleton3D:wrist.l", "Rig/Skeleton3D:wrist.r"]
+filters = [".", ".:_is_attacking", "Rig/Hit Box:position", "Rig/Skeleton3D:chest", "Rig/Skeleton3D:hand.l", "Rig/Skeleton3D:hand.r", "Rig/Skeleton3D:handslot.l", "Rig/Skeleton3D:handslot.r", "Rig/Skeleton3D:head", "Rig/Skeleton3D:lowerarm.l", "Rig/Skeleton3D:lowerarm.r", "Rig/Skeleton3D:spine", "Rig/Skeleton3D:upperarm.l", "Rig/Skeleton3D:upperarm.r", "Rig/Skeleton3D:wrist.l", "Rig/Skeleton3D:wrist.r"]
 
 [resource]
+graph_offset = Vector2(-800, 36)
 nodes/Action/node = SubResource("AnimationNodeStateMachine_1air6")
 nodes/Action/position = Vector2(-340, 280)
 nodes/Lower+Upper/node = SubResource("AnimationNodeBlend2_grob2")

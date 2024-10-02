@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dujtkfkjn3agj"]
+[gd_scene load_steps=12 format=3 uid="uid://dujtkfkjn3agj"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_lj7g2"]
 [ext_resource type="MeshLibrary" uid="uid://cahijkkfy3axd" path="res://Imported Assets/Halloween/halloween_mesh_library.tres" id="2_ppmmg"]
 [ext_resource type="PackedScene" uid="uid://ovkq88civi8k" path="res://Scenes/Enemies/skeleton_minion.tscn" id="3_vmtyv"]
 [ext_resource type="PackedScene" uid="uid://c86wrgk0e17d1" path="res://Scenes/Enemies/skeleton_mage.tscn" id="4_2c112"]
+[ext_resource type="Script" path="res://Scripts/Enemies/attack.gd" id="4_fx4r5"]
 [ext_resource type="PackedScene" uid="uid://d2dolmw02u64r" path="res://Scenes/Enemies/skeleton_rogue.tscn" id="5_s5s6c"]
 [ext_resource type="PackedScene" uid="uid://dwvngno8a1nw1" path="res://Scenes/Enemies/skeleton_warrior.tscn" id="6_ni8s3"]
 [ext_resource type="Texture2D" uid="uid://b5dff1enbcmtq" path="res://Imported Assets/Skybox/AllSky_Night_MoonBurst Equirect.png" id="7_l175e"]
@@ -60,6 +61,9 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="Skeleton Minion" parent="Enemies" instance=ExtResource("3_vmtyv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -10)
+
+[node name="AI" type="Node" parent="Enemies/Skeleton Minion"]
+script = ExtResource("4_fx4r5")
 
 [node name="Skeleton Mage" parent="Enemies" instance=ExtResource("4_2c112")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -18)

@@ -21,6 +21,9 @@ func set_locked_on_blend(blend_amount : Vector2):
 func set_not_locked_on_blend(blend_amount : float):
 	set("parameters/Hit/BlendTree/Movement/Locomotion/Not Locked On/blend_position", blend_amount)
 
+func set_dodge_blend(blend_amount : Vector2):
+	set("parameters/Hit/BlendTree/Movement/Dodge/blend_position", blend_amount)
+
 func get_hit(lightly : bool):
 	_hit_state.travel("Hit_A" if lightly else "Hit_B")
 

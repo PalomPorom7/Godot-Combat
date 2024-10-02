@@ -88,6 +88,12 @@ func _character_inputs(event : InputEvent):
 		_input_buffer.start()
 		await _input_buffer.timeout
 		_character.cancel_attack()
+	# Dodge
+	if event.is_action_pressed("dodge"):
+		_character.dodge()
+		_input_buffer.start()
+		await _input_buffer.timeout
+		_character.cancel_dodge()
 
 # Every frame, ignoring delta time
 func _process(_delta : float):

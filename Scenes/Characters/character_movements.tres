@@ -1,4 +1,27 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=24 format=3 uid="uid://dbbreoo8w6fld"]
+[gd_resource type="AnimationNodeStateMachine" load_steps=31 format=3 uid="uid://dbbreoo8w6fld"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dyxw1"]
+animation = &"Dodge_Forward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dhtm4"]
+animation = &"Dodge_Backward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qghsd"]
+animation = &"Dodge_Left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nrv7j"]
+animation = &"Dodge_Right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_yhcui"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_dyxw1")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_dhtm4")
+blend_point_1/pos = Vector2(0, -1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_qghsd")
+blend_point_2/pos = Vector2(-1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_nrv7j")
+blend_point_3/pos = Vector2(1, 0)
+snap = Vector2(1, 1)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ea2pv"]
 animation = &"Jump_Idle"
@@ -102,7 +125,19 @@ xfade_time = 0.3
 advance_mode = 2
 advance_expression = "not is_on_floor()"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1n83e"]
+xfade_time = 0.1
+advance_mode = 2
+advance_expression = "_wants_to_dodge and not _is_hit and not _is_attacking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mbs22"]
+xfade_time = 0.1
+switch_mode = 2
+advance_mode = 2
+
 [resource]
+states/Dodge/node = SubResource("AnimationNodeBlendSpace2D_yhcui")
+states/Dodge/position = Vector2(537, 221)
 states/Jump_Idle/node = SubResource("AnimationNodeAnimation_ea2pv")
 states/Jump_Idle/position = Vector2(537, -160)
 states/Jump_Land/node = SubResource("AnimationNodeAnimation_38msk")
@@ -111,5 +146,5 @@ states/Jump_Start/node = SubResource("AnimationNodeAnimation_wdyu2")
 states/Jump_Start/position = Vector2(436, -41)
 states/Locomotion/node = SubResource("AnimationNodeStateMachine_vn6aa")
 states/Locomotion/position = Vector2(537, 100)
-transitions = ["Jump_Start", "Jump_Idle", SubResource("AnimationNodeStateMachineTransition_qivs4"), "Jump_Idle", "Jump_Land", SubResource("AnimationNodeStateMachineTransition_er6gw"), "Start", "Locomotion", SubResource("AnimationNodeStateMachineTransition_4shal"), "Locomotion", "Jump_Start", SubResource("AnimationNodeStateMachineTransition_qbwqe"), "Jump_Land", "Locomotion", SubResource("AnimationNodeStateMachineTransition_bcyg2"), "Locomotion", "Jump_Idle", SubResource("AnimationNodeStateMachineTransition_igcc1")]
-graph_offset = Vector2(-376, -188)
+transitions = ["Jump_Start", "Jump_Idle", SubResource("AnimationNodeStateMachineTransition_qivs4"), "Jump_Idle", "Jump_Land", SubResource("AnimationNodeStateMachineTransition_er6gw"), "Start", "Locomotion", SubResource("AnimationNodeStateMachineTransition_4shal"), "Locomotion", "Jump_Start", SubResource("AnimationNodeStateMachineTransition_qbwqe"), "Jump_Land", "Locomotion", SubResource("AnimationNodeStateMachineTransition_bcyg2"), "Locomotion", "Jump_Idle", SubResource("AnimationNodeStateMachineTransition_igcc1"), "Locomotion", "Dodge", SubResource("AnimationNodeStateMachineTransition_1n83e"), "Dodge", "Locomotion", SubResource("AnimationNodeStateMachineTransition_mbs22")]
+graph_offset = Vector2(-381, -159)

@@ -1,19 +1,20 @@
-[gd_resource type="Resource" script_class="Equipment" load_steps=4 format=3 uid="uid://cwecw4vp86tdp"]
+[gd_resource type="Resource" script_class="Shield" load_steps=4 format=3 uid="uid://cwecw4vp86tdp"]
 
-[ext_resource type="Script" path="res://Scripts/Custom Resources/Items/equipment.gd" id="1_6p0ka"]
 [ext_resource type="Texture2D" uid="uid://dnhnfs5nacqbg" path="res://Imported Assets/Icons/#1 - Transparent Icons.png" id="1_8gojc"]
+[ext_resource type="Script" path="res://Scripts/Custom Resources/Items/shield.gd" id="2_lrrks"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_i2jgv"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4aao"]
 atlas = ExtResource("1_8gojc")
 region = Rect2(0, 192, 32, 32)
 
 [resource]
-script = ExtResource("1_6p0ka")
+script = ExtResource("2_lrrks")
+damage_reduction = 1
 type = 1
 name = "Barbarian Round Shield"
 description = "It's scrappy but durable!"
 value = 1
-icon = SubResource("AtlasTexture_i2jgv")
+icon = SubResource("AtlasTexture_c4aao")
 scene = "res://Scenes/Items/barbarian_round_shield.tscn"
 is_usable = false
 is_consumed_on_use = false

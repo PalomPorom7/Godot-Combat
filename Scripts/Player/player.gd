@@ -94,6 +94,11 @@ func _character_inputs(event : InputEvent):
 		_input_buffer.start()
 		await _input_buffer.timeout
 		_character.cancel_dodge()
+	# Block
+	if event.is_action_pressed("block"):
+		_character.block(true)
+	elif event.is_action_released("block"):
+		_character.block(false)
 
 # Every frame, ignoring delta time
 func _process(_delta : float):

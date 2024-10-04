@@ -24,6 +24,13 @@ func set_not_locked_on_blend(blend_amount : float):
 func set_dodge_blend(blend_amount : Vector2):
 	set("parameters/Hit/BlendTree/Movement/Dodge/blend_position", blend_amount)
 
+func is_blocking() -> bool:
+	var current_action : String = _action_state.get_current_node()
+	return current_action == "Blocking" or current_action == "Block_Hit"
+
+func block_hit():
+	_action_state.travel("Block_Hit")
+
 func get_hit(lightly : bool):
 	_hit_state.travel("Hit_A" if lightly else "Hit_B")
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=4 uid="uid://dgr8pm535o44b"]
 
-[ext_resource type="Script" path="res://Scripts/Items/item.gd" id="1_artwy"]
+[ext_resource type="Script" path="res://Scripts/Items/shield.gd" id="1_ag4t7"]
 [ext_resource type="Texture2D" uid="uid://caxtjyslwx5eg" path="res://Imported Assets/Characters/Barbarian_barbarian_texture.png" id="1_k5jo2"]
 [ext_resource type="Resource" uid="uid://cwecw4vp86tdp" path="res://Scripts/Custom Resources/Items/Barbarian Round Shield.tres" id="2_17rav"]
 
@@ -52,7 +52,7 @@ size = Vector3(0.89563, 0.89502, 0.356201)
 [node name="Barbarian Round Shield" type="RigidBody3D"]
 collision_layer = 32
 collision_mask = 801
-script = ExtResource("1_artwy")
+script = ExtResource("1_ag4t7")
 resource = ExtResource("2_17rav")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

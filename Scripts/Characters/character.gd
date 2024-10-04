@@ -37,6 +37,7 @@ var _jump_velocity : float
 var _attack_animation : Enums.WeaponType
 var _main_hand : Node3D
 var _off_hand : Node3D
+var _has_shield_equipped : bool
 
 # Combat variables
 @export_category("Combat")
@@ -54,6 +55,8 @@ var _target : Node3D
 var _locked_on_blend : Vector2
 @export var _dodge_force : float = 8
 var _dodge_direction : Vector3
+var _wants_to_block : bool
+var _interrupt_block : bool
 
 # Buffered Inputs
 var _wants_to_jump : bool
@@ -92,6 +95,10 @@ func don(item : Equipment):
 			_off_hand = instance
 			_off_hand.damage = item.damage
 			_off_hand.set_hit_box_collision_mask(_enemy_hurt_layer)
+	if item is Shield:
+		_off_hand = instance
+		instance.damage_reduction = item.damage_reduction
+		_has_shield_equipped = true
 
 # Remove any piece of equipment in the designated socket.
 func doff(socket : int):
@@ -102,6 +109,7 @@ func doff(socket : int):
 		_attack_animation = Enums.WeaponType.UNARMED
 	elif socket == Enums.EquipmentType.OFF_HAND:
 		_off_hand = null
+		_has_shield_equipped = false
 	if _sockets[socket].get_child_count() > 0:
 		_sockets[socket].get_child(0).queue_free()
 
@@ -149,9 +157,11 @@ func attack():
 	_wants_to_attack = true
 	_wants_to_jump = false
 	_wants_to_dodge = false
+	_interrupt_block = true
 
 func cancel_attack():
 	_wants_to_attack = false
+	_interrupt_block = false
 
 func activate_hit_box(active : bool, which_hand : int = 1):
 	match which_hand:
@@ -166,6 +176,11 @@ func _on_hit_box_area_entered(hurt_box : Area3D):
 	hurt_box.get_parent().take_damage(1, (global_position - hurt_box.global_position).normalized())
 
 func take_damage(amount : int, direction : Vector3 = Vector3.ZERO):
+	if _animation.is_blocking() and direction.dot(_rig.global_basis.z) > 0.5:
+		amount = max(amount - _off_hand.damage_reduction, 0)
+		_animation.block_hit()
+		if amount == 0:
+			return
 	_current_health = max(_current_health - amount, 0)
 	_interrupt_actions()
 	health_changed.emit(float(_current_health) / _max_health)
@@ -184,6 +199,7 @@ func dodge():
 	_wants_to_dodge = true
 	_wants_to_jump = false
 	_wants_to_attack = false
+	_interrupt_block = true
 	if _input_direction == Vector3.ZERO:
 		_dodge_direction = _rig.global_basis.z * -1
 	else:
@@ -192,13 +208,17 @@ func dodge():
 
 func cancel_dodge():
 	_wants_to_dodge = false
+	_interrupt_block = false
 
 func apply_dodge_velocity():
-	_wants_to_dodge = false
+	cancel_dodge()
 	velocity = _dodge_direction * _dodge_force
 
 func activate_hurt_box(active : bool):
 	_hurt_box.set_deferred("monitorable", active)
+
+func block(should_block : bool):
+	_wants_to_block = should_block and _has_shield_equipped
 
 func _interrupt_actions():
 	_is_attacking = false

@@ -57,6 +57,7 @@ var _locked_on_blend : Vector2
 var _dodge_direction : Vector3
 var _wants_to_block : bool
 var _interrupt_block : bool
+var _weapon_is_loaded : bool
 
 # Buffered Inputs
 var _wants_to_jump : bool
@@ -104,6 +105,7 @@ func don(item : Equipment):
 func doff(socket : int):
 	if socket == Enums.EquipmentType.MAIN_HAND:
 		_main_hand = null
+		_weapon_is_loaded = false
 		if _attack_animation == Enums.WeaponType.DUAL_WIELD:
 			doff(Enums.EquipmentType.OFF_HAND)
 		_attack_animation = Enums.WeaponType.UNARMED
@@ -219,6 +221,17 @@ func activate_hurt_box(active : bool):
 
 func block(should_block : bool):
 	_wants_to_block = should_block and _has_shield_equipped
+
+func shoot():
+	_weapon_is_loaded = false
+	if _target and _rig.global_basis.z.dot((_target.global_position - global_position).normalized()) > 0.75:
+		_main_hand.shoot_at_target(_target)
+	else:
+		_main_hand.shoot(_rig.global_basis.z)
+
+func reload():
+	_weapon_is_loaded = true
+	_main_hand.reload()
 
 func _interrupt_actions():
 	_is_attacking = false

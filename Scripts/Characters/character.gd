@@ -3,6 +3,7 @@ extends CharacterBody3D
 # Components required to draw and animate the character.
 @onready var _rig : Node3D = $Rig
 @onready var _animation : AnimationTree = $AnimationTree
+@onready var _navigation : NavigationAgent3D = $NavigationAgent3D
 
 # Variables for controlling how a character walks, runs, and rotates.
 @export_category("Locomotion")
@@ -119,12 +120,16 @@ func doff(socket : int):
 
 #region Movement
 
+func navigate_to(destination : Vector3):
+	_navigation.target_position = destination
+	_input_direction = ((_navigation.get_next_path_position() - global_position) * Vector3(1, 0, 1)).normalized()
+
 func restrict_movement(can_not_move : bool):
 	_can_move = not can_not_move
 
 # Tell this character to move in a direction, if they can.
 func move(direction : Vector3):
-	if not _can_move:
+	if not _can_move or _is_dead:
 		return
 	_input_direction = direction
 
@@ -136,6 +141,8 @@ func run():
 
 # Tell this character to jump if they can.
 func jump():
+	if _is_dead:
+		return
 	_wants_to_jump = true
 	_wants_to_attack = false
 	_wants_to_dodge = false
@@ -188,14 +195,18 @@ func take_damage(amount : int, direction : Vector3 = Vector3.ZERO):
 	health_changed.emit(float(_current_health) / _max_health)
 	_from_behind = direction.dot(_rig.global_basis.z) < 0
 	if _current_health == 0:
-		_is_dead = true
-		_is_hit = false
-		died.emit()
-		collision_layer = 0
-		collision_mask = 1
-		_hurt_box.set_deferred("monitorable", false)
+		die()
 	else:
 		_animation.get_hit(amount < 2)
+
+func die():
+	_input_direction = Vector3.ZERO
+	_is_dead = true
+	_is_hit = false
+	died.emit()
+	collision_layer = 0
+	collision_mask = 1
+	_hurt_box.set_deferred("monitorable", false)
 
 func dodge():
 	_wants_to_dodge = true

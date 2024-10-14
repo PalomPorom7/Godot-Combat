@@ -32,6 +32,10 @@ func toggle_inventory():
 	else:
 		_inventory.open()
 
+func _on_character_died():
+	await _fade.to_black()
+	get_tree().reload_current_scene()
+
 # Return to the title scene
 func _on_exit_pressed():
 	await _fade.to_black()

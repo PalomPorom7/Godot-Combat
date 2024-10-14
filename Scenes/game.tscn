@@ -252,6 +252,7 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 script = ExtResource("8_v3vli")
 
+[connection signal="died" from="Character" to="." method="_on_character_died"]
 [connection signal="health_changed" from="Character" to="UI/Health Gauge" method="set_value"]
 [connection signal="target_exited_range" from="Character/SpringArm/Camera" to="Player" method="toggle_lock"]
 [connection signal="body_entered" from="Character/SpringArm/Camera/Target Range" to="Character/SpringArm/Camera" method="_on_target_range_body_entered"]

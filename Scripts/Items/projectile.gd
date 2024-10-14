@@ -25,5 +25,5 @@ func _on_timer_timeout():
 	queue_free()
 
 func _on_hit_box_area_entered(hurt_box : Area3D):
-	hurt_box.get_parent().take_damage(_damage, (hurt_box.global_position - global_position).normalized())
+	hurt_box.get_parent().take_damage(_damage, (global_position - hurt_box.global_position).normalized())
 	queue_free()

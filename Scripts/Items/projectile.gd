@@ -17,7 +17,7 @@ func shoot(impulse_force : Vector3):
 	_timer.start()
 	_hit_box.monitoring = true
 
-func _on_body_entered(body : Node):
+func _on_body_entered(_body : Node):
 	set_deferred("freeze", true)
 	_hit_box.set_deferred("monitoring", false)
 
